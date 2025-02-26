@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://duu7h4qycrvdw"]
+
+[ext_resource type="Texture2D" uid="uid://bworkgelw6f0n" path="res://Assets/Menu Items/Buttons/Back_Button_Normal.png" id="1_gv1eo"]
+[ext_resource type="Texture2D" uid="uid://wj88rvat625j" path="res://Assets/Menu Items/Buttons/Back_Button_Pressed.png" id="2_5obib"]
+[ext_resource type="AudioStream" uid="uid://df2rf7y7kxm3r" path="res://Assets/SFX/button_sfx.wav" id="3_rcci2"]
+
+[node name="Back_Button" type="TextureButton"]
+offset_right = 460.0
+offset_bottom = 226.0
+scale = Vector2(0.4, 0.4)
+size_flags_horizontal = 0
+texture_normal = ExtResource("1_gv1eo")
+texture_pressed = ExtResource("2_5obib")
+
+[node name="ButtonSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_rcci2")

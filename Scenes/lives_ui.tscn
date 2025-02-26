@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwrxnrcmysdr6"]
+
+[ext_resource type="Texture2D" uid="uid://dt2viaqtfao05" path="res://Assets/UI/Hearts/3_Lives_UI.png" id="1_fbdfh"]
+
+[node name="Lives_UI" type="CanvasLayer"]
+
+[node name="Lives" type="TextureRect" parent="."]
+offset_right = 194.0
+offset_bottom = 62.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_fbdfh")

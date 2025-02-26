@@ -1,0 +1,366 @@
+[gd_scene load_steps=26 format=3 uid="uid://blt41s7orcdi7"]
+
+[ext_resource type="Texture2D" uid="uid://ctql2vs4icsjw" path="res://Assets/Background/Background.png" id="1_bmq3u"]
+[ext_resource type="Script" path="res://Scripts/level_script.gd" id="1_he41m"]
+[ext_resource type="PackedScene" uid="uid://c7jc5d3435f62" path="res://Scenes/player.tscn" id="3_ux40t"]
+[ext_resource type="PackedScene" uid="uid://8labev21orig" path="res://Scenes/platform_small.tscn" id="4_4k5vj"]
+[ext_resource type="Texture2D" uid="uid://bmwe1jx76jyyk" path="res://Assets/Menu Items/ESC_Menu_Background.png" id="5_if47o"]
+[ext_resource type="PackedScene" uid="uid://djyakml7y2b23" path="res://Scenes/platform_large.tscn" id="5_j3gl4"]
+[ext_resource type="FontFile" uid="uid://bwcgoiol4t6u0" path="res://Assets/Fonts/TropiLand-L3MPg.ttf" id="5_jil1l"]
+[ext_resource type="PackedScene" uid="uid://cxchylkrsktjq" path="res://Scenes/esc_menu.tscn" id="6_yw4j5"]
+[ext_resource type="PackedScene" uid="uid://w2f6stkv7vmf" path="res://Scenes/win_screen.tscn" id="7_lkd1x"]
+[ext_resource type="PackedScene" uid="uid://cwrxnrcmysdr6" path="res://Scenes/lives_ui.tscn" id="8_r4nt3"]
+[ext_resource type="PackedScene" uid="uid://dmesleyedcn1" path="res://Scenes/death_menu.tscn" id="9_cfkae"]
+[ext_resource type="Texture2D" uid="uid://cg7w0q37uuat7" path="res://Assets/Background/Background_Sky.png" id="9_w87b4"]
+[ext_resource type="PackedScene" uid="uid://catbepjj1gbam" path="res://Scenes/rock_1.tscn" id="10_2khmg"]
+[ext_resource type="FontFile" uid="uid://0id4oi1crqwy" path="res://Assets/Fonts/Daydream.ttf" id="11_0kuuv"]
+[ext_resource type="PackedScene" uid="uid://tkfuedkvtvrm" path="res://Scenes/rock_2.tscn" id="11_1mqfd"]
+[ext_resource type="PackedScene" uid="uid://bb8ro6ct5b2un" path="res://Scenes/rock_3.tscn" id="12_h662j"]
+[ext_resource type="PackedScene" uid="uid://dpp2d8wths5og" path="res://Scenes/house_1.tscn" id="13_1nihe"]
+[ext_resource type="PackedScene" uid="uid://b2l14wdih8otd" path="res://Scenes/sweet_collectable.tscn" id="14_o4cd7"]
+[ext_resource type="TileSet" uid="uid://dawjhmipdiyo7" path="res://Assets/platform_tilemap.tres" id="17_eaku2"]
+[ext_resource type="Script" path="res://Scripts/level_timer_script.gd" id="18_m4dtw"]
+[ext_resource type="AudioStream" uid="uid://npifu4avha06" path="res://Assets/SFX/lose_sfx.wav" id="21_p0nvk"]
+[ext_resource type="AudioStream" uid="uid://dm6qjrk6j8qyp" path="res://Assets/SFX/win_sfx.wav" id="21_xw36q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0mnk0"]
+size = Vector2(431.333, 111.334)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_05gex"]
+size = Vector2(32, 1944)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4b27"]
+size = Vector2(48, 1952)
+
+[node name="Level" type="Node" groups=["level1"]]
+script = ExtResource("1_he41m")
+
+[node name="UI_Elements" type="CanvasLayer" parent="." groups=["level1"]]
+
+[node name="Lives_UI" parent="UI_Elements" instance=ExtResource("8_r4nt3")]
+
+[node name="ESC_Menu" parent="UI_Elements" groups=["level1"] instance=ExtResource("6_yw4j5")]
+
+[node name="Death_Menu" parent="UI_Elements" instance=ExtResource("9_cfkae")]
+
+[node name="Score" type="CanvasLayer" parent="UI_Elements"]
+
+[node name="Sprite2D" type="Sprite2D" parent="UI_Elements/Score"]
+position = Vector2(1116, 55.2)
+scale = Vector2(0.21875, 0.0911111)
+texture = ExtResource("5_if47o")
+
+[node name="Label" type="Label" parent="UI_Elements/Score"]
+offset_left = 987.0
+offset_top = 19.0
+offset_right = 1250.0
+offset_bottom = 94.0
+theme_override_colors/font_color = Color(0.880018, 0.702829, 0.919566, 1)
+theme_override_fonts/font = ExtResource("5_jil1l")
+theme_override_font_sizes/font_size = 50
+text = "Score: 00 / 10"
+metadata/_edit_use_anchors_ = true
+
+[node name="Win_Screen" parent="UI_Elements" instance=ExtResource("7_lkd1x")]
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="BG_Ground" type="TextureRect" parent="Environment"]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_bmq3u")
+metadata/_edit_lock_ = true
+
+[node name="BG_Sky" type="TextureRect" parent="Environment"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1880.0
+offset_right = 24.0
+offset_bottom = -720.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_w87b4")
+metadata/_edit_lock_ = true
+
+[node name="TileMap" type="TileMap" parent="Environment"]
+position = Vector2(0, -48)
+scale = Vector2(3, 3)
+tile_set = ExtResource("17_eaku2")
+format = 2
+layer_0/tile_data = PackedInt32Array(720905, 0, 0, 720906, 65536, 0, 720907, 65536, 0, 720908, 0, 0, 720909, 0, 0, 720911, 0, 0, 720913, 65536, 0, 720914, 65536, 0, 720915, 65536, 0, 720916, 0, 0, 720917, 0, 0, 720918, 65536, 0, 720919, 0, 0, 720920, 65536, 0, 720904, 65536, 0, 720903, 0, 0, 720897, 0, 0, 720898, 0, 0, 720899, 65536, 0, 720900, 0, 0, 720922, 0, 0, 720921, 65536, 0, 720901, 65536, 0, 720902, 65536, 0, 720896, 65536, 0, 786432, 0, 1, 851968, 0, 2, 917504, 0, 3, 786433, 0, 1, 851969, 0, 2, 917505, 0, 3, 786434, 0, 1, 851970, 0, 2, 917506, 0, 3, 786435, 0, 1, 851971, 0, 2, 917507, 0, 3, 786436, 0, 1, 851972, 0, 2, 917508, 0, 3, 786437, 0, 1, 851973, 0, 2, 917509, 0, 3, 786438, 0, 1, 851974, 0, 2, 917510, 0, 3, 786439, 0, 1, 851975, 0, 2, 917511, 0, 3, 786440, 0, 1, 851976, 0, 2, 917512, 0, 3, 786441, 0, 1, 851977, 0, 2, 917513, 0, 3, 786442, 0, 1, 851978, 0, 2, 917514, 0, 3, 786443, 0, 1, 851979, 0, 2, 917515, 0, 3, 786444, 0, 1, 851980, 0, 2, 917516, 0, 3, 786445, 0, 1, 851981, 0, 2, 917517, 0, 3, 786446, 0, 1, 851982, 0, 2, 917518, 0, 3, 786447, 0, 1, 851983, 0, 2, 917519, 0, 3, 786448, 0, 1, 851984, 0, 2, 917520, 0, 3, 786449, 0, 1, 851985, 0, 2, 917521, 0, 3, 786450, 0, 1, 851986, 0, 2, 917522, 0, 3, 786451, 0, 1, 851987, 0, 2, 917523, 0, 3, 786452, 0, 1, 851988, 0, 2, 917524, 0, 3, 786453, 0, 1, 851989, 0, 2, 917525, 0, 3, 786454, 0, 1, 851990, 0, 2, 917526, 0, 3, 786455, 0, 1, 851991, 0, 2, 917527, 0, 3, 786456, 0, 1, 851992, 0, 2, 917528, 0, 3, 786457, 0, 1, 851993, 0, 2, 917529, 0, 3, 786458, 0, 1, 851994, 0, 2, 917530, 0, 3, 983040, 0, 3, 983041, 0, 3, 983042, 0, 3, 983043, 0, 3, 983044, 0, 3, 983045, 0, 3, 983046, 0, 3, 983047, 0, 3, 983048, 0, 3, 983049, 0, 3, 983050, 0, 3, 983051, 0, 3, 983052, 0, 3, 983053, 0, 3, 983054, 0, 3, 983055, 0, 3, 983056, 0, 3, 983057, 0, 3, 983058, 0, 3, 983059, 0, 3, 983060, 0, 3, 983061, 0, 3, 983062, 0, 3, 983063, 0, 3, 983064, 0, 3, 983065, 0, 3, 983066, 0, 3, 1048576, 0, 3, 1114112, 0, 3, 1114113, 0, 3, 1048577, 0, 3, 1048578, 0, 3, 1114114, 0, 3, 1048579, 0, 3, 1048580, 0, 3, 1114116, 0, 3, 1114115, 0, 3, 1048581, 0, 3, 1114117, 0, 3, 1114118, 0, 3, 1048582, 0, 3, 1048583, 0, 3, 1048584, 0, 3, 1114120, 0, 3, 1114119, 0, 3, 1114121, 0, 3, 1114122, 0, 3, 1114123, 0, 3, 1114124, 0, 3, 1114125, 0, 3, 1114126, 0, 3, 1114127, 0, 3, 1114128, 0, 3, 1114129, 0, 3, 1114130, 0, 3, 1114131, 0, 3, 1114132, 0, 3, 1114133, 0, 3, 1114134, 0, 3, 1114135, 0, 3, 1114136, 0, 3, 1114137, 0, 3, 1114138, 0, 3, 1048602, 0, 3, 1048601, 0, 3, 1048600, 0, 3, 1048599, 0, 3, 1048598, 0, 3, 1048597, 0, 3, 1048596, 0, 3, 1048595, 0, 3, 1048594, 0, 3, 1048593, 0, 3, 1048592, 0, 3, 1048591, 0, 3, 1048590, 0, 3, 1048589, 0, 3, 1048588, 0, 3, 1048587, 0, 3, 1048586, 0, 3, 1048585, 0, 3, 655365, 65536, 2, 655366, 131072, 2, 655378, 65536, 2, 655379, 131072, 2, 720910, 65536, 0, 720912, 0, 0, 524288, 196608, 3, 589824, 196608, 4, 655360, 196608, 5, 524289, 262144, 3, 589825, 262144, 4, 655361, 262144, 5, 524290, 327680, 3, 589826, 327680, 4, 655362, 327680, 5)
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment/TileMap"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/TileMap/StaticBody2D"]
+position = Vector2(216.333, 232.333)
+shape = SubResource("RectangleShape2D_0mnk0")
+
+[node name="World_Border" type="Node" parent="Environment"]
+
+[node name="Border_Left" type="Node2D" parent="Environment/World_Border"]
+position = Vector2(-10, 0)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment/World_Border/Border_Left"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/World_Border/Border_Left/StaticBody2D"]
+position = Vector2(-6, -156)
+shape = SubResource("RectangleShape2D_05gex")
+
+[node name="Border_Right" type="Node2D" parent="Environment/World_Border"]
+position = Vector2(1290, 8)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment/World_Border/Border_Right"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/World_Border/Border_Right/StaticBody2D"]
+position = Vector2(14, -168)
+shape = SubResource("RectangleShape2D_g4b27")
+
+[node name="EnvironmentText" type="Node" parent="Environment"]
+
+[node name="CollectText" type="Label" parent="Environment/EnvironmentText"]
+offset_left = 288.0
+offset_top = 384.0
+offset_right = 506.0
+offset_bottom = 406.0
+theme_override_fonts/font = ExtResource("11_0kuuv")
+theme_override_font_sizes/font_size = 16
+text = "collect the sweets..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AvoidText" type="Label" parent="Environment/EnvironmentText"]
+offset_left = 536.0
+offset_top = 512.0
+offset_right = 887.0
+offset_bottom = 534.0
+theme_override_fonts/font = ExtResource("11_0kuuv")
+theme_override_font_sizes/font_size = 16
+text = "...and avoid the rocks to win!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Platforms" type="Node" parent="Environment"]
+
+[node name="Platforms" type="Node" parent="Environment/Platforms"]
+
+[node name="Platform_Small" parent="Environment/Platforms/Platforms" instance=ExtResource("4_4k5vj")]
+position = Vector2(480, 160)
+
+[node name="Platform_Small2" parent="Environment/Platforms/Platforms" instance=ExtResource("4_4k5vj")]
+position = Vector2(216, 48)
+
+[node name="Platform_Small3" parent="Environment/Platforms/Platforms" instance=ExtResource("4_4k5vj")]
+position = Vector2(120, -80)
+
+[node name="Platform_Small4" parent="Environment/Platforms/Platforms" instance=ExtResource("4_4k5vj")]
+position = Vector2(392, -160)
+
+[node name="Platform_Small18" parent="Environment/Platforms/Platforms" instance=ExtResource("4_4k5vj")]
+position = Vector2(424, -248)
+
+[node name="Platform_Small19" parent="Environment/Platforms/Platforms" instance=ExtResource("4_4k5vj")]
+position = Vector2(541, -432)
+
+[node name="Platform_Small20" parent="Environment/Platforms/Platforms" instance=ExtResource("4_4k5vj")]
+position = Vector2(266, -536)
+
+[node name="Platform_Small21" parent="Environment/Platforms/Platforms" instance=ExtResource("4_4k5vj")]
+position = Vector2(624, -536)
+
+[node name="Platform_Small22" parent="Environment/Platforms/Platforms" instance=ExtResource("4_4k5vj")]
+position = Vector2(996, -680)
+
+[node name="Platform_Small11" parent="Environment/Platforms/Platforms" instance=ExtResource("4_4k5vj")]
+position = Vector2(266, -224)
+
+[node name="Platform_Small5" parent="Environment/Platforms/Platforms" instance=ExtResource("4_4k5vj")]
+position = Vector2(184, -344)
+
+[node name="Platform_Small6" parent="Environment/Platforms/Platforms" instance=ExtResource("4_4k5vj")]
+position = Vector2(888, -352)
+
+[node name="Platform_Small7" parent="Environment/Platforms/Platforms" instance=ExtResource("4_4k5vj")]
+position = Vector2(664, -208)
+
+[node name="Platform_Small8" parent="Environment/Platforms/Platforms" instance=ExtResource("4_4k5vj")]
+position = Vector2(80, -456)
+
+[node name="Platform_Small9" parent="Environment/Platforms/Platforms" instance=ExtResource("4_4k5vj")]
+position = Vector2(360, -408)
+
+[node name="Platform_Small10" parent="Environment/Platforms/Platforms" instance=ExtResource("4_4k5vj")]
+position = Vector2(440, -552)
+
+[node name="Platform_Small13" parent="Environment/Platforms/Platforms" instance=ExtResource("4_4k5vj")]
+position = Vector2(112, -608)
+
+[node name="Platform_Small14" parent="Environment/Platforms/Platforms" instance=ExtResource("4_4k5vj")]
+position = Vector2(112, -608)
+
+[node name="Platform_Small15" parent="Environment/Platforms/Platforms" instance=ExtResource("4_4k5vj")]
+position = Vector2(768, -429)
+
+[node name="Platform_Small16" parent="Environment/Platforms/Platforms" instance=ExtResource("4_4k5vj")]
+position = Vector2(783, -584)
+
+[node name="Platform_Small17" parent="Environment/Platforms/Platforms" instance=ExtResource("4_4k5vj")]
+position = Vector2(1032, -416)
+
+[node name="Platform_Small23" parent="Environment/Platforms/Platforms" instance=ExtResource("4_4k5vj")]
+position = Vector2(1128, -520)
+
+[node name="Platform_Small24" parent="Environment/Platforms/Platforms" instance=ExtResource("4_4k5vj")]
+position = Vector2(360, -32)
+
+[node name="Platform_Small25" parent="Environment/Platforms/Platforms" instance=ExtResource("4_4k5vj")]
+position = Vector2(272, -96)
+
+[node name="Platform_Small12" parent="Environment/Platforms/Platforms" instance=ExtResource("4_4k5vj")]
+position = Vector2(1152, -312)
+
+[node name="Platform_Large2" parent="Environment/Platforms/Platforms" instance=ExtResource("5_j3gl4")]
+position = Vector2(739, 240)
+
+[node name="Platform_Large3" parent="Environment/Platforms/Platforms" instance=ExtResource("5_j3gl4")]
+position = Vector2(552, 56)
+
+[node name="Platform_Large5" parent="Environment/Platforms/Platforms" instance=ExtResource("5_j3gl4")]
+position = Vector2(1096, -96)
+
+[node name="Platform_Large8" parent="Environment/Platforms/Platforms" instance=ExtResource("5_j3gl4")]
+position = Vector2(872, -208)
+
+[node name="Platform_Large10" parent="Environment/Platforms/Platforms" instance=ExtResource("5_j3gl4")]
+position = Vector2(960, -528)
+
+[node name="Platform_Large11" parent="Environment/Platforms/Platforms" instance=ExtResource("5_j3gl4")]
+position = Vector2(320, -680)
+
+[node name="Platform_Large14" parent="Environment/Platforms/Platforms" instance=ExtResource("5_j3gl4")]
+position = Vector2(648, -680)
+
+[node name="Platform_Large9" parent="Environment/Platforms/Platforms" instance=ExtResource("5_j3gl4")]
+position = Vector2(1032, -208)
+
+[node name="Platform_Large6" parent="Environment/Platforms/Platforms" instance=ExtResource("5_j3gl4")]
+position = Vector2(672, -88)
+
+[node name="Platform_Large7" parent="Environment/Platforms/Platforms" instance=ExtResource("5_j3gl4")]
+position = Vector2(552, -296)
+
+[node name="Platform_Large" parent="Environment/Platforms/Platforms" instance=ExtResource("5_j3gl4")]
+position = Vector2(856, 376)
+
+[node name="Platform_Large4" parent="Environment/Platforms/Platforms" instance=ExtResource("5_j3gl4")]
+position = Vector2(832, 8)
+
+[node name="Hazards" type="Node" parent="Environment/Platforms"]
+
+[node name="Rock_1" parent="Environment/Platforms/Hazards" instance=ExtResource("10_2khmg")]
+position = Vector2(680, 472)
+
+[node name="Rock_4" parent="Environment/Platforms/Hazards" instance=ExtResource("10_2khmg")]
+position = Vector2(465, 149)
+
+[node name="Rock_5" parent="Environment/Platforms/Hazards" instance=ExtResource("10_2khmg")]
+position = Vector2(544, -320)
+
+[node name="Rock_6" parent="Environment/Platforms/Hazards" instance=ExtResource("10_2khmg")]
+position = Vector2(936, -552)
+
+[node name="Rock_8" parent="Environment/Platforms/Hazards" instance=ExtResource("10_2khmg")]
+position = Vector2(936, -552)
+
+[node name="Rock_2" parent="Environment/Platforms/Hazards" instance=ExtResource("11_1mqfd")]
+position = Vector2(1248, 448)
+
+[node name="Rock_3" parent="Environment/Platforms/Hazards" instance=ExtResource("12_h662j")]
+position = Vector2(848, -24)
+
+[node name="Rock_9" parent="Environment/Platforms/Hazards" instance=ExtResource("12_h662j")]
+position = Vector2(632, -712)
+
+[node name="Collectables" type="Node2D" parent="Environment"]
+position = Vector2(473, 325)
+scale = Vector2(2, 2)
+
+[node name="Sweet_Collectable11" parent="Environment/Collectables" instance=ExtResource("14_o4cd7")]
+position = Vector2(-24.5, 65.5)
+scale = Vector2(1, 1)
+
+[node name="Sweet_Collectable12" parent="Environment/Collectables" instance=ExtResource("14_o4cd7")]
+position = Vector2(159.5, -177.5)
+scale = Vector2(1, 1)
+
+[node name="Sweet_Collectable13" parent="Environment/Collectables" instance=ExtResource("14_o4cd7")]
+position = Vector2(-176.5, -215)
+scale = Vector2(1, 1)
+
+[node name="Sweet_Collectable14" parent="Environment/Collectables" instance=ExtResource("14_o4cd7")]
+position = Vector2(327.5, -229)
+scale = Vector2(1, 1)
+
+[node name="Sweet_Collectable15" parent="Environment/Collectables" instance=ExtResource("14_o4cd7")]
+position = Vector2(-140.5, -347.5)
+scale = Vector2(1, 1)
+
+[node name="Sweet_Collectable16" parent="Environment/Collectables" instance=ExtResource("14_o4cd7")]
+position = Vector2(143.5, -61.5)
+scale = Vector2(1, 1)
+
+[node name="Sweet_Collectable17" parent="Environment/Collectables" instance=ExtResource("14_o4cd7")]
+position = Vector2(27.5, -153)
+scale = Vector2(1, 1)
+
+[node name="Sweet_Collectable18" parent="Environment/Collectables" instance=ExtResource("14_o4cd7")]
+position = Vector2(95.5, -279)
+scale = Vector2(1, 1)
+
+[node name="Sweet_Collectable19" parent="Environment/Collectables" instance=ExtResource("14_o4cd7")]
+position = Vector2(39, -390.5)
+scale = Vector2(1, 1)
+
+[node name="Sweet_Collectable20" parent="Environment/Collectables" instance=ExtResource("14_o4cd7")]
+position = Vector2(257, -445.5)
+scale = Vector2(1, 1)
+
+[node name="House_1" parent="Environment" instance=ExtResource("13_1nihe")]
+position = Vector2(1101, 340)
+scale = Vector2(5, 5)
+
+[node name="Player" parent="." instance=ExtResource("3_ux40t")]
+position = Vector2(120, 296)
+
+[node name="LevelTimer" type="CanvasLayer" parent="."]
+script = ExtResource("18_m4dtw")
+
+[node name="LevelTimer" type="Timer" parent="LevelTimer"]
+wait_time = 60.0
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="LevelTimer"]
+position = Vector2(174, 672.4)
+scale = Vector2(0.253125, 0.112222)
+texture = ExtResource("5_if47o")
+
+[node name="TimerText" type="Label" parent="LevelTimer"]
+offset_left = 30.0
+offset_top = 640.0
+offset_right = 419.0
+offset_bottom = 715.0
+theme_override_fonts/font = ExtResource("5_jil1l")
+theme_override_font_sizes/font_size = 50
+text = "Time Left: 00.0"
+
+[node name="Lose_SFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("21_p0nvk")
+
+[node name="Win_SFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("21_xw36q")
+volume_db = 4.878

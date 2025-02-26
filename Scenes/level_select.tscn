@@ -1,0 +1,126 @@
+[gd_scene load_steps=8 format=3 uid="uid://c6wq3hgovo6lt"]
+
+[ext_resource type="Script" path="res://Scripts/level_select_script.gd" id="1_aweqc"]
+[ext_resource type="Texture2D" uid="uid://di3gtylimnkbr" path="res://Assets/Background/Background_Blured.png" id="1_sgou3"]
+[ext_resource type="Texture2D" uid="uid://edokj13eha3s" path="res://Assets/Menu Items/Sweetie Dash Logo.png" id="2_owcf1"]
+[ext_resource type="PackedScene" uid="uid://duu7h4qycrvdw" path="res://Scenes/back_button.tscn" id="3_skvrg"]
+[ext_resource type="PackedScene" uid="uid://byfksoete405s" path="res://Scenes/level_number_buttons.tscn" id="5_35ywp"]
+[ext_resource type="Texture2D" uid="uid://bmwe1jx76jyyk" path="res://Assets/Menu Items/ESC_Menu_Background.png" id="6_tm5ui"]
+[ext_resource type="FontFile" uid="uid://bwcgoiol4t6u0" path="res://Assets/Fonts/TropiLand-L3MPg.ttf" id="7_y16p6"]
+
+[node name="Level_Select" type="Node"]
+script = ExtResource("1_aweqc")
+
+[node name="BG" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_sgou3")
+metadata/_edit_lock_ = true
+
+[node name="SweetieDashLogo" type="TextureRect" parent="BG"]
+layout_mode = 1
+offset_left = -64.0
+offset_top = -24.0
+offset_right = 1216.0
+offset_bottom = 696.0
+scale = Vector2(0.247504, 0.247504)
+texture = ExtResource("2_owcf1")
+
+[node name="Level_Number_Buttons" parent="." instance=ExtResource("5_35ywp")]
+
+[node name="Back_Button" parent="." instance=ExtResource("3_skvrg")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -104.0
+offset_right = 476.0
+offset_bottom = 122.0
+grow_vertical = 0
+
+[node name="HighScores" type="Node" parent="."]
+
+[node name="HighScore_BG" type="TextureRect" parent="HighScores"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = 176.0
+offset_right = 3938.0
+offset_bottom = 2070.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.150292, 0.0885391)
+texture = ExtResource("6_tm5ui")
+
+[node name="Title" type="Label" parent="HighScores"]
+offset_left = 510.0
+offset_top = 536.0
+offset_right = 766.0
+offset_bottom = 611.0
+theme_override_fonts/font = ExtResource("7_y16p6")
+theme_override_font_sizes/font_size = 50
+text = "Highscores:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="L1Score" type="Label" parent="HighScores"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -304.0
+offset_top = 264.0
+offset_right = -123.0
+offset_bottom = 317.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("7_y16p6")
+theme_override_font_sizes/font_size = 35
+text = "Level 1: 00.00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="L2Score" type="Label" parent="HighScores"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = 264.0
+offset_right = 98.0
+offset_bottom = 317.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("7_y16p6")
+theme_override_font_sizes/font_size = 35
+text = "Level 2: 00.00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="L3Score" type="Label" parent="HighScores"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 126.0
+offset_top = 264.0
+offset_right = 312.0
+offset_bottom = 317.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("7_y16p6")
+theme_override_font_sizes/font_size = 35
+text = "Level 3: 00.00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Back_Button" to="." method="_on_back_button_pressed"]

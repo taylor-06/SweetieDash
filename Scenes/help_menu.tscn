@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=3 uid="uid://b3uasc2b3s4jy"]
+
+[ext_resource type="Script" path="res://Scripts/help_menu_script.gd" id="1_snklx"]
+[ext_resource type="Texture2D" uid="uid://di3gtylimnkbr" path="res://Assets/Background/Background_Blured.png" id="2_xh6y0"]
+[ext_resource type="Texture2D" uid="uid://edokj13eha3s" path="res://Assets/Menu Items/Sweetie Dash Logo.png" id="3_r4vyc"]
+[ext_resource type="PackedScene" uid="uid://duu7h4qycrvdw" path="res://Scenes/back_button.tscn" id="5_a3crm"]
+[ext_resource type="Texture2D" uid="uid://bmwe1jx76jyyk" path="res://Assets/Menu Items/ESC_Menu_Background.png" id="5_x5l4p"]
+[ext_resource type="FontFile" uid="uid://dw2w6etcippc1" path="res://Assets/Fonts/TropiLand-L3MPg.ttf" id="6_mf8s5"]
+[ext_resource type="PackedScene" uid="uid://crrxwbeex8tc1" path="res://Scenes/reset_score_button.tscn" id="7_bwva5"]
+
+[node name="Help_Menu" type="Node"]
+script = ExtResource("1_snklx")
+
+[node name="BG" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_xh6y0")
+metadata/_edit_lock_ = true
+
+[node name="SweetieDashLogo" type="TextureRect" parent="BG"]
+layout_mode = 1
+offset_left = -64.0
+offset_top = -24.0
+offset_right = 1216.0
+offset_bottom = 696.0
+scale = Vector2(0.247504, 0.247504)
+texture = ExtResource("3_r4vyc")
+
+[node name="Back_Button" parent="." instance=ExtResource("5_a3crm")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -104.0
+offset_right = 476.0
+offset_bottom = 122.0
+grow_vertical = 0
+
+[node name="Middle Content" type="Node" parent="."]
+
+[node name="BlackBG" type="Sprite2D" parent="Middle Content"]
+position = Vector2(640, 336)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_x5l4p")
+
+[node name="Label" type="Label" parent="Middle Content/BlackBG"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1280.0
+offset_top = -740.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_mf8s5")
+theme_override_font_sizes/font_size = 90
+text = "Controls:
+Left: A / Left Arrow
+Right: D / Right Arrow
+Jump: Space / Up Arrow
+Pause Menu: Escape"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Reset_Score_Button" parent="." instance=ExtResource("7_bwva5")]
+offset_left = 480.0
+offset_top = 616.0
+offset_right = 1282.0
+offset_bottom = 842.0
+
+[connection signal="pressed" from="Back_Button" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="Reset_Score_Button" to="." method="_on_reset_score_button_pressed"]

@@ -1,0 +1,98 @@
+[gd_scene load_steps=10 format=3 uid="uid://byfksoete405s"]
+
+[ext_resource type="Script" path="res://Scripts/level_select_buttons_script.gd" id="1_7ouf3"]
+[ext_resource type="Texture2D" uid="uid://ij270c8mcsjm" path="res://Assets/Menu Items/Buttons/Level_1_Button_Normal.png" id="2_5pham"]
+[ext_resource type="Texture2D" uid="uid://cydc4lk0ij14j" path="res://Assets/Menu Items/Buttons/Level_1_Button_Pressed.png" id="3_b2qks"]
+[ext_resource type="AudioStream" uid="uid://df2rf7y7kxm3r" path="res://Assets/SFX/button_sfx.wav" id="4_84any"]
+[ext_resource type="Texture2D" uid="uid://ddliu5eoa1dtd" path="res://Assets/Menu Items/Buttons/Level_2_Button_Normal.png" id="4_mof5q"]
+[ext_resource type="Texture2D" uid="uid://f0s5vype3lvh" path="res://Assets/Menu Items/Buttons/Level_2_Button_Pressed.png" id="5_22p11"]
+[ext_resource type="Texture2D" uid="uid://grrqlugr34q" path="res://Assets/Menu Items/Buttons/Level_3_Button_Normal.png" id="6_kwupv"]
+[ext_resource type="Texture2D" uid="uid://dr8v8ttu1j4jh" path="res://Assets/Menu Items/Buttons/Level_3_Button_Pressed.png" id="7_ad23q"]
+
+[sub_resource type="GDScript" id="GDScript_3uagh"]
+script/source = "extends TextureButton
+
+@onready var buttonSFX = $ButtonSFX
+
+func _on_pressed():
+	buttonSFX.play()
+	print(\"button sfx played\")
+"
+
+[node name="Level_Number_Buttons" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7ouf3")
+
+[node name="Level1" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -248.0
+offset_top = -68.0
+offset_right = -13.0
+offset_bottom = 157.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("2_5pham")
+texture_pressed = ExtResource("3_b2qks")
+script = SubResource("GDScript_3uagh")
+
+[node name="ButtonSFX" type="AudioStreamPlayer2D" parent="Level1"]
+position = Vector2(-784, -584)
+scale = Vector2(2, 2)
+stream = ExtResource("4_84any")
+
+[node name="Level2" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -68.0
+offset_right = 178.0
+offset_bottom = 157.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("4_mof5q")
+texture_pressed = ExtResource("5_22p11")
+script = SubResource("GDScript_3uagh")
+
+[node name="ButtonSFX" type="AudioStreamPlayer2D" parent="Level2"]
+stream = ExtResource("4_84any")
+
+[node name="Level3" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 135.0
+offset_top = -68.0
+offset_right = 370.0
+offset_bottom = 157.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("6_kwupv")
+texture_pressed = ExtResource("7_ad23q")
+script = SubResource("GDScript_3uagh")
+
+[node name="ButtonSFX" type="AudioStreamPlayer2D" parent="Level3"]
+stream = ExtResource("4_84any")
+
+[connection signal="pressed" from="Level1" to="." method="_on_level_1_pressed"]
+[connection signal="pressed" from="Level2" to="." method="_on_level_2_pressed"]
+[connection signal="pressed" from="Level3" to="." method="_on_level_3_pressed"]

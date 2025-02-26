@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpp2d8wths5og"]
+
+[ext_resource type="Texture2D" uid="uid://cliy2cwa7jhla" path="res://Assets/Tiles/House_1.png" id="1_l1go4"]
+
+[node name="House_1" type="Node2D"]
+scale = Vector2(3, 3)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_l1go4")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-23, 23, -23, 28, 22, 28, 22, 23, 19, 23, 19, -5, 20, -4, 21, -3, 23, -3, 24, -4, 24, -6, 18, -11, 18, -22, 19, -22, 19, -26, 11, -26, 11, -22, 12, -22, 12, -18, 0, -30, -1, -30, -25, -6, -25, -4, -24, -3, -22, -3, -20, -5, -20, 23)

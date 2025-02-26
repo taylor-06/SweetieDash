@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbjkghl4ou8jo"]
+
+[ext_resource type="Texture2D" uid="uid://clswqvm4t0kci" path="res://Assets/Menu Items/Buttons/Play_Button_Normal.png" id="1_hqm0d"]
+[ext_resource type="Texture2D" uid="uid://dvk57fu5ntl7k" path="res://Assets/Menu Items/Buttons/Play_Button_Pressed.png" id="2_hdqhp"]
+[ext_resource type="AudioStream" uid="uid://bvmsi1qrqqfgh" path="res://Assets/SFX/button_sfx.wav" id="3_023fh"]
+
+[sub_resource type="GDScript" id="GDScript_3uagh"]
+script/source = "extends TextureButton
+
+@onready var buttonSFX = $ButtonSFX
+
+func _on_pressed():
+	buttonSFX.play()
+	print(\"button sfx played\")
+"
+
+[node name="Play_Button" type="TextureButton"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -360.0
+offset_right = -180.0
+offset_bottom = -134.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.4, 0.4)
+size_flags_horizontal = 0
+texture_normal = ExtResource("1_hqm0d")
+texture_pressed = ExtResource("2_hdqhp")
+script = SubResource("GDScript_3uagh")
+
+[node name="ButtonSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_023fh")

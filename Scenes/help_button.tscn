@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dic6o6q24v7m8"]
+
+[ext_resource type="Texture2D" uid="uid://bmt8mmqk2ju45" path="res://Assets/Menu Items/Buttons/Help_Button_Normal.png" id="1_5loc7"]
+[ext_resource type="Texture2D" uid="uid://cqud7ev7is3mg" path="res://Assets/Menu Items/Buttons/Help_Button_Pressed.png" id="2_0nm4c"]
+[ext_resource type="AudioStream" uid="uid://df2rf7y7kxm3r" path="res://Assets/SFX/button_sfx.wav" id="3_7js3a"]
+
+[node name="Help_Button" type="TextureButton"]
+offset_right = 460.0
+offset_bottom = 226.0
+scale = Vector2(0.4, 0.4)
+size_flags_horizontal = 0
+texture_normal = ExtResource("1_5loc7")
+texture_pressed = ExtResource("2_0nm4c")
+
+[node name="ButtonSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_7js3a")

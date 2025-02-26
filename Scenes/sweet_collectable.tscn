@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2l14wdih8otd"]
+
+[ext_resource type="Script" path="res://Scripts/sweet_collectable_script.gd" id="1_k4e8m"]
+[ext_resource type="Texture2D" uid="uid://c1x8txce2lg7n" path="res://Assets/Collectables/Sweet_Collectable.png" id="2_j4ngd"]
+[ext_resource type="AudioStream" uid="uid://ddnmb0oivwsjf" path="res://Assets/SFX/collect_sfx.wav" id="3_g0ewe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7hi8m"]
+size = Vector2(22, 24)
+
+[node name="Sweet_Collectable" type="Node2D" groups=["sweet"]]
+scale = Vector2(2, 2)
+script = ExtResource("1_k4e8m")
+
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["sweet"]]
+texture = ExtResource("2_j4ngd")
+
+[node name="Area2D" type="Area2D" parent="." groups=["sweet"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["sweet"]]
+shape = SubResource("RectangleShape2D_7hi8m")
+
+[node name="CollectSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_g0ewe")
+pitch_scale = 1.5
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

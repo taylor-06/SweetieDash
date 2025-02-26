@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://w2f6stkv7vmf"]
+
+[ext_resource type="Script" path="res://Scripts/win_screen_script.gd" id="1_4vnx5"]
+[ext_resource type="Texture2D" uid="uid://bmwe1jx76jyyk" path="res://Assets/Menu Items/ESC_Menu_Background.png" id="1_6dvwr"]
+[ext_resource type="FontFile" uid="uid://bwcgoiol4t6u0" path="res://Assets/Fonts/TropiLand-L3MPg.ttf" id="2_men6n"]
+[ext_resource type="PackedScene" uid="uid://b6ava5dcnfmnf" path="res://Scenes/level_select_button.tscn" id="3_1o40h"]
+[ext_resource type="PackedScene" uid="uid://duu7h4qycrvdw" path="res://Scenes/back_button.tscn" id="5_m88tg"]
+[ext_resource type="Texture2D" uid="uid://d4f0de7q4qvws" path="res://Assets/Menu Items/Buttons/Retry_Button_Normal.png" id="6_qlomq"]
+[ext_resource type="Texture2D" uid="uid://vkxgf3m5f6ci" path="res://Assets/Menu Items/Buttons/Retry_Button_Pressed.png" id="7_vskgf"]
+
+[node name="Win_Screen" type="CanvasLayer"]
+visible = false
+script = ExtResource("1_4vnx5")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_6dvwr")
+
+[node name="Label" type="Label" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -136.0
+offset_bottom = -136.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_men6n")
+theme_override_font_sizes/font_size = 150
+text = "YOU WIN!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Level_Select_Button" parent="TextureRect" instance=ExtResource("3_1o40h")]
+layout_mode = 1
+offset_left = 552.0
+offset_top = 352.0
+offset_right = -268.0
+offset_bottom = -70.0
+
+[node name="Retry_Button" parent="TextureRect" instance=ExtResource("5_m88tg")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = 111.0
+offset_right = 372.0
+offset_bottom = 337.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("6_qlomq")
+texture_pressed = ExtResource("7_vskgf")
+
+[connection signal="pressed" from="TextureRect/Level_Select_Button" to="." method="_on_level_select_button_pressed"]
+[connection signal="pressed" from="TextureRect/Retry_Button" to="." method="_on_retry_button_pressed"]

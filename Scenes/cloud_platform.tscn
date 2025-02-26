@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://dnaso3j3m21mt"]
+
+[ext_resource type="Texture2D" uid="uid://tuejuslmy3bu" path="res://Assets/Platforms/Cloud_Platform.png" id="1_44ifc"]
+[ext_resource type="Script" path="res://Scripts/cloud_platform_script.gd" id="1_rbkh1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rs66r"]
+size = Vector2(100, 19)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8e4vq"]
+size = Vector2(87, 19)
+
+[node name="Cloud_Platform" type="Node2D"]
+script = ExtResource("1_rbkh1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_44ifc")
+
+[node name="RigidBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(2, 22.5)
+shape = SubResource("RectangleShape2D_rs66r")
+one_way_collision = true
+
+[node name="Disable_Collision_Timer" type="Timer" parent="."]
+wait_time = 0.7
+one_shot = true
+
+[node name="Enable_Collision_Timer" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(4, 3)
+shape = SubResource("RectangleShape2D_8e4vq")
+
+[connection signal="timeout" from="Disable_Collision_Timer" to="." method="_on_disable_collision_timer_timeout"]
+[connection signal="timeout" from="Enable_Collision_Timer" to="." method="_on_enable_collision_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

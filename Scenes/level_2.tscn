@@ -1,0 +1,430 @@
+[gd_scene load_steps=27 format=3 uid="uid://mjd044qklh36"]
+
+[ext_resource type="Script" path="res://Scripts/level_script.gd" id="1_sgjme"]
+[ext_resource type="Texture2D" uid="uid://ctql2vs4icsjw" path="res://Assets/Background/Background.png" id="2_l7dn0"]
+[ext_resource type="PackedScene" uid="uid://c7jc5d3435f62" path="res://Scenes/player.tscn" id="3_abwj2"]
+[ext_resource type="Texture2D" uid="uid://bmwe1jx76jyyk" path="res://Assets/Menu Items/ESC_Menu_Background.png" id="5_e8u2d"]
+[ext_resource type="FontFile" uid="uid://bwcgoiol4t6u0" path="res://Assets/Fonts/TropiLand-L3MPg.ttf" id="6_erlk6"]
+[ext_resource type="PackedScene" uid="uid://cwrxnrcmysdr6" path="res://Scenes/lives_ui.tscn" id="7_adxm0"]
+[ext_resource type="PackedScene" uid="uid://w2f6stkv7vmf" path="res://Scenes/win_screen.tscn" id="7_xe2lv"]
+[ext_resource type="PackedScene" uid="uid://cxchylkrsktjq" path="res://Scenes/esc_menu.tscn" id="8_8vknu"]
+[ext_resource type="TileSet" uid="uid://dawjhmipdiyo7" path="res://Assets/platform_tilemap.tres" id="9_dbss1"]
+[ext_resource type="Texture2D" uid="uid://cg7w0q37uuat7" path="res://Assets/Background/Background_Sky.png" id="9_s6skn"]
+[ext_resource type="PackedScene" uid="uid://dmesleyedcn1" path="res://Scenes/death_menu.tscn" id="9_u7t75"]
+[ext_resource type="PackedScene" uid="uid://b2l14wdih8otd" path="res://Scenes/sweet_collectable.tscn" id="10_ki7qb"]
+[ext_resource type="Script" path="res://Scripts/level_timer_script.gd" id="11_ha76n"]
+[ext_resource type="PackedScene" uid="uid://djyakml7y2b23" path="res://Scenes/platform_large.tscn" id="11_nluft"]
+[ext_resource type="PackedScene" uid="uid://8labev21orig" path="res://Scenes/platform_small.tscn" id="12_4lqe2"]
+[ext_resource type="PackedScene" uid="uid://bqkpwmvcyxhca" path="res://Scenes/tree.tscn" id="12_cmtig"]
+[ext_resource type="PackedScene" uid="uid://dnaso3j3m21mt" path="res://Scenes/cloud_platform.tscn" id="13_vfrde"]
+[ext_resource type="FontFile" uid="uid://0id4oi1crqwy" path="res://Assets/Fonts/Daydream.ttf" id="16_4v128"]
+[ext_resource type="PackedScene" uid="uid://catbepjj1gbam" path="res://Scenes/rock_1.tscn" id="17_3xeso"]
+[ext_resource type="PackedScene" uid="uid://tkfuedkvtvrm" path="res://Scenes/rock_2.tscn" id="18_dx5cj"]
+[ext_resource type="PackedScene" uid="uid://bb8ro6ct5b2un" path="res://Scenes/rock_3.tscn" id="19_jex3f"]
+[ext_resource type="AudioStream" uid="uid://npifu4avha06" path="res://Assets/SFX/lose_sfx.wav" id="22_8ug5g"]
+[ext_resource type="AudioStream" uid="uid://dm6qjrk6j8qyp" path="res://Assets/SFX/win_sfx.wav" id="23_kh7ey"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tudgo"]
+size = Vector2(32, 2696)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i6p0y"]
+size = Vector2(48, 2696)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1381q"]
+size = Vector2(431.333, 111.334)
+
+[node name="Level" type="Node" groups=["level2"]]
+script = ExtResource("1_sgjme")
+
+[node name="UI_Elements" type="CanvasLayer" parent="." groups=["level2"]]
+
+[node name="Lives_UI" parent="UI_Elements" instance=ExtResource("7_adxm0")]
+
+[node name="ESC_Menu" parent="UI_Elements" groups=["level2"] instance=ExtResource("8_8vknu")]
+
+[node name="Death_Menu" parent="UI_Elements" instance=ExtResource("9_u7t75")]
+
+[node name="Score" type="CanvasLayer" parent="UI_Elements"]
+
+[node name="Sprite2D" type="Sprite2D" parent="UI_Elements/Score"]
+position = Vector2(1116, 55.2)
+scale = Vector2(0.21875, 0.0911111)
+texture = ExtResource("5_e8u2d")
+
+[node name="Label" type="Label" parent="UI_Elements/Score"]
+offset_left = 987.0
+offset_top = 19.0
+offset_right = 1250.0
+offset_bottom = 94.0
+theme_override_colors/font_color = Color(0.880018, 0.702829, 0.919566, 1)
+theme_override_fonts/font = ExtResource("6_erlk6")
+theme_override_font_sizes/font_size = 50
+text = "Score: 00 / 10"
+metadata/_edit_use_anchors_ = true
+
+[node name="Win_Screen" parent="UI_Elements" instance=ExtResource("7_xe2lv")]
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="BG" type="TextureRect" parent="Environment"]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_l7dn0")
+metadata/_edit_lock_ = true
+
+[node name="BG2" type="TextureRect" parent="Environment"]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1280.0
+offset_right = 1280.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_l7dn0")
+flip_h = true
+metadata/_edit_lock_ = true
+
+[node name="BG_Sky2" type="TextureRect" parent="Environment"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1280.0
+offset_top = -1880.0
+offset_right = 1280.0
+offset_bottom = -720.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_s6skn")
+
+[node name="BG_Sky" type="TextureRect" parent="Environment"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1880.0
+offset_bottom = -720.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_s6skn")
+
+[node name="World_Border" type="Node" parent="Environment"]
+
+[node name="Border_Left" type="Node2D" parent="Environment/World_Border"]
+position = Vector2(-10, 0)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment/World_Border/Border_Left"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/World_Border/Border_Left/StaticBody2D"]
+position = Vector2(-6, -532)
+shape = SubResource("RectangleShape2D_tudgo")
+
+[node name="Border_Right" type="Node2D" parent="Environment/World_Border"]
+position = Vector2(2568, 8)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment/World_Border/Border_Right"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/World_Border/Border_Right/StaticBody2D"]
+position = Vector2(-655, -528)
+shape = SubResource("RectangleShape2D_i6p0y")
+
+[node name="Platforms" type="Node" parent="Environment/World_Border"]
+
+[node name="TileMap" type="TileMap" parent="Environment/World_Border/Platforms"]
+position = Vector2(0, -48)
+scale = Vector2(3, 3)
+tile_set = ExtResource("9_dbss1")
+format = 2
+layer_0/tile_data = PackedInt32Array(720905, 0, 0, 720906, 65536, 0, 720907, 65536, 0, 720908, 0, 0, 720909, 0, 0, 720910, 65536, 0, 720911, 0, 0, 720912, 0, 0, 720913, 65536, 0, 720914, 65536, 0, 720915, 65536, 0, 720916, 0, 0, 720917, 0, 0, 720918, 65536, 0, 720919, 0, 0, 720920, 65536, 0, 720904, 65536, 0, 720903, 0, 0, 720897, 0, 0, 720898, 0, 0, 720899, 65536, 0, 720900, 0, 0, 720922, 0, 0, 720921, 65536, 0, 720901, 65536, 0, 720902, 65536, 0, 720896, 65536, 0, 786432, 0, 1, 851968, 0, 2, 917504, 0, 3, 786433, 0, 1, 851969, 0, 2, 917505, 0, 3, 786434, 0, 1, 851970, 0, 2, 917506, 0, 3, 786435, 0, 1, 851971, 0, 2, 917507, 0, 3, 786436, 0, 1, 851972, 0, 2, 917508, 0, 3, 786437, 0, 1, 851973, 0, 2, 917509, 0, 3, 786438, 0, 1, 851974, 0, 2, 917510, 0, 3, 786439, 0, 1, 851975, 0, 2, 917511, 0, 3, 786440, 0, 1, 851976, 0, 2, 917512, 0, 3, 786441, 0, 1, 851977, 0, 2, 917513, 0, 3, 786442, 0, 1, 851978, 0, 2, 917514, 0, 3, 786443, 0, 1, 851979, 0, 2, 917515, 0, 3, 786444, 0, 1, 851980, 0, 2, 917516, 0, 3, 786445, 0, 1, 851981, 0, 2, 917517, 0, 3, 786446, 0, 1, 851982, 0, 2, 917518, 0, 3, 786447, 0, 1, 851983, 0, 2, 917519, 0, 3, 786448, 0, 1, 851984, 0, 2, 917520, 0, 3, 786449, 0, 1, 851985, 0, 2, 917521, 0, 3, 786450, 0, 1, 851986, 0, 2, 917522, 0, 3, 786451, 0, 1, 851987, 0, 2, 917523, 0, 3, 786452, 0, 1, 851988, 0, 2, 917524, 0, 3, 786453, 0, 1, 851989, 0, 2, 917525, 0, 3, 786454, 0, 1, 851990, 0, 2, 917526, 0, 3, 786455, 0, 1, 851991, 0, 2, 917527, 0, 3, 786456, 0, 1, 851992, 0, 2, 917528, 0, 3, 786457, 0, 1, 851993, 0, 2, 917529, 0, 3, 786458, 0, 1, 851994, 0, 2, 917530, 0, 3, 983040, 0, 3, 983041, 0, 3, 983042, 0, 3, 983043, 0, 3, 983044, 0, 3, 983045, 0, 3, 983046, 0, 3, 983047, 0, 3, 983048, 0, 3, 983049, 0, 3, 983050, 0, 3, 983051, 0, 3, 983052, 0, 3, 983053, 0, 3, 983054, 0, 3, 983055, 0, 3, 983056, 0, 3, 983057, 0, 3, 983058, 0, 3, 983059, 0, 3, 983060, 0, 3, 983061, 0, 3, 983062, 0, 3, 983063, 0, 3, 983064, 0, 3, 983065, 0, 3, 983066, 0, 3, 1048576, 0, 3, 1114112, 0, 3, 1114113, 0, 3, 1048577, 0, 3, 1048578, 0, 3, 1114114, 0, 3, 1048579, 0, 3, 1048580, 0, 3, 1114116, 0, 3, 1114115, 0, 3, 1048581, 0, 3, 1114117, 0, 3, 1114118, 0, 3, 1048582, 0, 3, 1048583, 0, 3, 1048584, 0, 3, 1114120, 0, 3, 1114119, 0, 3, 1114121, 0, 3, 1114122, 0, 3, 1114123, 0, 3, 1114124, 0, 3, 1114125, 0, 3, 1114126, 0, 3, 1114127, 0, 3, 1114128, 0, 3, 1114129, 0, 3, 1114130, 0, 3, 1114131, 0, 3, 1114132, 0, 3, 1114133, 0, 3, 1114134, 0, 3, 1114135, 0, 3, 1114136, 0, 3, 1114137, 0, 3, 1114138, 0, 3, 1048602, 0, 3, 1048601, 0, 3, 1048600, 0, 3, 1048599, 0, 3, 1048598, 0, 3, 1048597, 0, 3, 1048596, 0, 3, 1048595, 0, 3, 1048594, 0, 3, 1048593, 0, 3, 1048592, 0, 3, 1048591, 0, 3, 1048590, 0, 3, 1048589, 0, 3, 1048588, 0, 3, 1048587, 0, 3, 1048586, 0, 3, 1048585, 0, 3, 655365, 65536, 2, 655366, 131072, 2, 655378, 65536, 2, 655379, 131072, 2, 524324, 196608, 3, 589860, 196608, 4, 655396, 196608, 5, 524325, 262144, 3, 589861, 262144, 4, 655397, 262144, 5, 524326, 327680, 3, 589862, 327680, 4, 655398, 327680, 5, 524328, 196608, 3, 589864, 196608, 4, 655400, 196608, 5, 524329, 262144, 3, 589865, 262144, 4, 655401, 262144, 5, 524330, 327680, 3, 589866, 327680, 4, 655402, 327680, 5, 524335, 196608, 3, 589871, 196608, 4, 655407, 196608, 5, 524336, 262144, 3, 589872, 262144, 4, 655408, 262144, 5, 524337, 327680, 3, 589873, 327680, 4, 655409, 327680, 5)
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment/World_Border/Platforms/TileMap"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/World_Border/Platforms/TileMap/StaticBody2D"]
+position = Vector2(216.333, 232.333)
+shape = SubResource("RectangleShape2D_1381q")
+
+[node name="TileMap2" type="TileMap" parent="Environment/World_Border/Platforms"]
+position = Vector2(1290, -48)
+scale = Vector2(3, 3)
+tile_set = ExtResource("9_dbss1")
+format = 2
+layer_0/tile_data = PackedInt32Array(720905, 0, 0, 720906, 65536, 0, 720907, 65536, 0, 720908, 0, 0, 720909, 0, 0, 720910, 65536, 0, 720911, 0, 0, 720912, 0, 0, 720913, 65536, 0, 720914, 65536, 0, 720915, 65536, 0, 720916, 0, 0, 720917, 0, 0, 720918, 65536, 0, 720919, 0, 0, 720920, 65536, 0, 720904, 65536, 0, 720903, 0, 0, 720897, 0, 0, 720898, 0, 0, 720899, 65536, 0, 720900, 0, 0, 720922, 0, 0, 720921, 65536, 0, 720901, 65536, 0, 720902, 65536, 0, 720896, 65536, 0, 786432, 0, 1, 851968, 0, 2, 917504, 0, 3, 786433, 0, 1, 851969, 0, 2, 917505, 0, 3, 786434, 0, 1, 851970, 0, 2, 917506, 0, 3, 786435, 0, 1, 851971, 0, 2, 917507, 0, 3, 786436, 0, 1, 851972, 0, 2, 917508, 0, 3, 786437, 0, 1, 851973, 0, 2, 917509, 0, 3, 786438, 0, 1, 851974, 0, 2, 917510, 0, 3, 786439, 0, 1, 851975, 0, 2, 917511, 0, 3, 786440, 0, 1, 851976, 0, 2, 917512, 0, 3, 786441, 0, 1, 851977, 0, 2, 917513, 0, 3, 786442, 0, 1, 851978, 0, 2, 917514, 0, 3, 786443, 0, 1, 851979, 0, 2, 917515, 0, 3, 786444, 0, 1, 851980, 0, 2, 917516, 0, 3, 786445, 0, 1, 851981, 0, 2, 917517, 0, 3, 786446, 0, 1, 851982, 0, 2, 917518, 0, 3, 786447, 0, 1, 851983, 0, 2, 917519, 0, 3, 786448, 0, 1, 851984, 0, 2, 917520, 0, 3, 786449, 0, 1, 851985, 0, 2, 917521, 0, 3, 786450, 0, 1, 851986, 0, 2, 917522, 0, 3, 786451, 0, 1, 851987, 0, 2, 917523, 0, 3, 786452, 0, 1, 851988, 0, 2, 917524, 0, 3, 786453, 0, 1, 851989, 0, 2, 917525, 0, 3, 786454, 0, 1, 851990, 0, 2, 917526, 0, 3, 786455, 0, 1, 851991, 0, 2, 917527, 0, 3, 786456, 0, 1, 851992, 0, 2, 917528, 0, 3, 786457, 0, 1, 851993, 0, 2, 917529, 0, 3, 786458, 0, 1, 851994, 0, 2, 917530, 0, 3, 983040, 0, 3, 983041, 0, 3, 983042, 0, 3, 983043, 0, 3, 983044, 0, 3, 983045, 0, 3, 983046, 0, 3, 983047, 0, 3, 983048, 0, 3, 983049, 0, 3, 983050, 0, 3, 983051, 0, 3, 983052, 0, 3, 983053, 0, 3, 983054, 0, 3, 983055, 0, 3, 983056, 0, 3, 983057, 0, 3, 983058, 0, 3, 983059, 0, 3, 983060, 0, 3, 983061, 0, 3, 983062, 0, 3, 983063, 0, 3, 983064, 0, 3, 983065, 0, 3, 983066, 0, 3, 1048576, 0, 3, 1114112, 0, 3, 1114113, 0, 3, 1048577, 0, 3, 1048578, 0, 3, 1114114, 0, 3, 1048579, 0, 3, 1048580, 0, 3, 1114116, 0, 3, 1114115, 0, 3, 1048581, 0, 3, 1114117, 0, 3, 1114118, 0, 3, 1048582, 0, 3, 1048583, 0, 3, 1048584, 0, 3, 1114120, 0, 3, 1114119, 0, 3, 1114121, 0, 3, 1114122, 0, 3, 1114123, 0, 3, 1114124, 0, 3, 1114125, 0, 3, 1114126, 0, 3, 1114127, 0, 3, 1114128, 0, 3, 1114129, 0, 3, 1114130, 0, 3, 1114131, 0, 3, 1114132, 0, 3, 1114133, 0, 3, 1114134, 0, 3, 1114135, 0, 3, 1114136, 0, 3, 1114137, 0, 3, 1114138, 0, 3, 1048602, 0, 3, 1048601, 0, 3, 1048600, 0, 3, 1048599, 0, 3, 1048598, 0, 3, 1048597, 0, 3, 1048596, 0, 3, 1048595, 0, 3, 1048594, 0, 3, 1048593, 0, 3, 1048592, 0, 3, 1048591, 0, 3, 1048590, 0, 3, 1048589, 0, 3, 1048588, 0, 3, 1048587, 0, 3, 1048586, 0, 3, 1048585, 0, 3, 655365, 65536, 2, 655366, 131072, 2, 655378, 65536, 2, 655379, 131072, 2)
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment/World_Border/Platforms/TileMap2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/World_Border/Platforms/TileMap2/StaticBody2D"]
+position = Vector2(216.333, 232.333)
+shape = SubResource("RectangleShape2D_1381q")
+
+[node name="Platform_Large" parent="Environment/World_Border/Platforms" instance=ExtResource("11_nluft")]
+position = Vector2(992, 288)
+
+[node name="Platform_Large2" parent="Environment/World_Border/Platforms" instance=ExtResource("11_nluft")]
+position = Vector2(1400, 256)
+
+[node name="Platform_Large3" parent="Environment/World_Border/Platforms" instance=ExtResource("11_nluft")]
+position = Vector2(1192, 168)
+
+[node name="Platform_Large5" parent="Environment/World_Border/Platforms" instance=ExtResource("11_nluft")]
+position = Vector2(368, -96)
+
+[node name="Platform_Large6" parent="Environment/World_Border/Platforms" instance=ExtResource("11_nluft")]
+position = Vector2(616, -160)
+
+[node name="Platform_Large21" parent="Environment/World_Border/Platforms" instance=ExtResource("11_nluft")]
+position = Vector2(200, -192)
+
+[node name="Platform_Large12" parent="Environment/World_Border/Platforms" instance=ExtResource("11_nluft")]
+position = Vector2(392, -329)
+
+[node name="Platform_Large13" parent="Environment/World_Border/Platforms" instance=ExtResource("11_nluft")]
+position = Vector2(592, -552)
+
+[node name="Platform_Large14" parent="Environment/World_Border/Platforms" instance=ExtResource("11_nluft")]
+position = Vector2(1056, -296)
+
+[node name="Platform_Large15" parent="Environment/World_Border/Platforms" instance=ExtResource("11_nluft")]
+position = Vector2(1464, -368)
+
+[node name="Platform_Large18" parent="Environment/World_Border/Platforms" instance=ExtResource("11_nluft")]
+position = Vector2(256, 128)
+
+[node name="Platform_Large19" parent="Environment/World_Border/Platforms" instance=ExtResource("11_nluft")]
+position = Vector2(160, 0)
+
+[node name="Platform_Large4" parent="Environment/World_Border/Platforms" instance=ExtResource("11_nluft")]
+position = Vector2(1488, 56)
+
+[node name="Platform_Large7" parent="Environment/World_Border/Platforms" instance=ExtResource("11_nluft")]
+position = Vector2(1432, -88)
+
+[node name="Platform_Large8" parent="Environment/World_Border/Platforms" instance=ExtResource("11_nluft")]
+position = Vector2(1728, -104)
+
+[node name="Platform_Large9" parent="Environment/World_Border/Platforms" instance=ExtResource("11_nluft")]
+position = Vector2(1472, -208)
+
+[node name="Platform_Small" parent="Environment/World_Border/Platforms" instance=ExtResource("12_4lqe2")]
+position = Vector2(824, 356)
+
+[node name="Platform_Small2" parent="Environment/World_Border/Platforms" instance=ExtResource("12_4lqe2")]
+position = Vector2(688, 168)
+
+[node name="Platform_Small3" parent="Environment/World_Border/Platforms" instance=ExtResource("12_4lqe2")]
+position = Vector2(856, 96)
+
+[node name="Platform_Small32" parent="Environment/World_Border/Platforms" instance=ExtResource("12_4lqe2")]
+position = Vector2(992, 160)
+
+[node name="Platform_Small4" parent="Environment/World_Border/Platforms" instance=ExtResource("12_4lqe2")]
+position = Vector2(520, 40)
+
+[node name="Platform_Small5" parent="Environment/World_Border/Platforms" instance=ExtResource("12_4lqe2")]
+position = Vector2(520, 40)
+
+[node name="Platform_Small6" parent="Environment/World_Border/Platforms" instance=ExtResource("12_4lqe2")]
+position = Vector2(1616, 352)
+
+[node name="Platform_Small7" parent="Environment/World_Border/Platforms" instance=ExtResource("12_4lqe2")]
+position = Vector2(712, -40)
+
+[node name="Platform_Small13" parent="Environment/World_Border/Platforms" instance=ExtResource("12_4lqe2")]
+position = Vector2(712, -40)
+
+[node name="Platform_Small14" parent="Environment/World_Border/Platforms" instance=ExtResource("12_4lqe2")]
+position = Vector2(608, -392)
+
+[node name="Platform_Small15" parent="Environment/World_Border/Platforms" instance=ExtResource("12_4lqe2")]
+position = Vector2(264, -472)
+
+[node name="Platform_Small16" parent="Environment/World_Border/Platforms" instance=ExtResource("12_4lqe2")]
+position = Vector2(408, -624)
+
+[node name="Platform_Small17" parent="Environment/World_Border/Platforms" instance=ExtResource("12_4lqe2")]
+position = Vector2(728, -512)
+
+[node name="Platform_Small18" parent="Environment/World_Border/Platforms" instance=ExtResource("12_4lqe2")]
+position = Vector2(920, -380)
+
+[node name="Platform_Small19" parent="Environment/World_Border/Platforms" instance=ExtResource("12_4lqe2")]
+position = Vector2(992, -528)
+
+[node name="Platform_Small20" parent="Environment/World_Border/Platforms" instance=ExtResource("12_4lqe2")]
+position = Vector2(1328, -320)
+
+[node name="Platform_Small21" parent="Environment/World_Border/Platforms" instance=ExtResource("12_4lqe2")]
+position = Vector2(1360, -496)
+
+[node name="Platform_Small22" parent="Environment/World_Border/Platforms" instance=ExtResource("12_4lqe2")]
+position = Vector2(1720, -544)
+
+[node name="Platform_Small23" parent="Environment/World_Border/Platforms" instance=ExtResource("12_4lqe2")]
+position = Vector2(1744, -304)
+
+[node name="Platform_Small28" parent="Environment/World_Border/Platforms" instance=ExtResource("12_4lqe2")]
+position = Vector2(1680, -712)
+
+[node name="Platform_Small29" parent="Environment/World_Border/Platforms" instance=ExtResource("12_4lqe2")]
+position = Vector2(1048, -676)
+
+[node name="Platform_Small30" parent="Environment/World_Border/Platforms" instance=ExtResource("12_4lqe2")]
+position = Vector2(1392, -656)
+
+[node name="Platform_Small31" parent="Environment/World_Border/Platforms" instance=ExtResource("12_4lqe2")]
+position = Vector2(656, -712)
+
+[node name="Platform_Small8" parent="Environment/World_Border/Platforms" instance=ExtResource("12_4lqe2")]
+position = Vector2(1008, -96)
+
+[node name="Platform_Small9" parent="Environment/World_Border/Platforms" instance=ExtResource("12_4lqe2")]
+position = Vector2(1200, -184)
+
+[node name="Platform_Small10" parent="Environment/World_Border/Platforms" instance=ExtResource("12_4lqe2")]
+position = Vector2(1768, 112)
+
+[node name="Cloud_Platform" parent="Environment/World_Border/Platforms" instance=ExtResource("13_vfrde")]
+position = Vector2(856, -288)
+
+[node name="Cloud_Platform2" parent="Environment/World_Border/Platforms" instance=ExtResource("13_vfrde")]
+position = Vector2(1168, -432)
+
+[node name="Cloud_Platform3" parent="Environment/World_Border/Platforms" instance=ExtResource("13_vfrde")]
+position = Vector2(416, -504)
+
+[node name="Cloud_Platform4" parent="Environment/World_Border/Platforms" instance=ExtResource("13_vfrde")]
+position = Vector2(808, -632)
+
+[node name="Cloud_Platform5" parent="Environment/World_Border/Platforms" instance=ExtResource("13_vfrde")]
+position = Vector2(1560, -648)
+
+[node name="Cloud_Platform9" parent="Environment/World_Border/Platforms" instance=ExtResource("13_vfrde")]
+position = Vector2(1216, -600)
+
+[node name="Cloud_Platform10" parent="Environment/World_Border/Platforms" instance=ExtResource("13_vfrde")]
+position = Vector2(1562, -296)
+
+[node name="Cloud_Platform13" parent="Environment/World_Border/Platforms" instance=ExtResource("13_vfrde")]
+position = Vector2(1520, -481)
+
+[node name="Cloud_Platform15" parent="Environment/World_Border/Platforms" instance=ExtResource("13_vfrde")]
+position = Vector2(424, -776)
+
+[node name="Cloud_Platform16" parent="Environment/World_Border/Platforms" instance=ExtResource("13_vfrde")]
+position = Vector2(160, -352)
+
+[node name="Cloud_Platform17" parent="Environment/World_Border/Platforms" instance=ExtResource("13_vfrde")]
+position = Vector2(160, -584)
+
+[node name="Collectables" type="Node" parent="Environment/World_Border"]
+
+[node name="Sweet_Collectable" parent="Environment/World_Border/Collectables" instance=ExtResource("10_ki7qb")]
+position = Vector2(672, 457)
+
+[node name="Sweet_Collectable2" parent="Environment/World_Border/Collectables" instance=ExtResource("10_ki7qb")]
+position = Vector2(1624, 326)
+
+[node name="Sweet_Collectable3" parent="Environment/World_Border/Collectables" instance=ExtResource("10_ki7qb")]
+position = Vector2(1439, -126)
+
+[node name="Sweet_Collectable4" parent="Environment/World_Border/Collectables" instance=ExtResource("10_ki7qb")]
+position = Vector2(1192, 130)
+
+[node name="Sweet_Collectable5" parent="Environment/World_Border/Collectables" instance=ExtResource("10_ki7qb")]
+position = Vector2(848, 72)
+
+[node name="Sweet_Collectable6" parent="Environment/World_Border/Collectables" instance=ExtResource("10_ki7qb")]
+position = Vector2(1198, -208)
+
+[node name="Sweet_Collectable7" parent="Environment/World_Border/Collectables" instance=ExtResource("10_ki7qb")]
+position = Vector2(1168, -444)
+
+[node name="Sweet_Collectable8" parent="Environment/World_Border/Collectables" instance=ExtResource("10_ki7qb")]
+position = Vector2(406, -516)
+
+[node name="Sweet_Collectable9" parent="Environment/World_Border/Collectables" instance=ExtResource("10_ki7qb")]
+position = Vector2(1736, -568)
+
+[node name="Sweet_Collectable10" parent="Environment/World_Border/Collectables" instance=ExtResource("10_ki7qb")]
+position = Vector2(608, -198)
+
+[node name="Tree" parent="Environment" instance=ExtResource("12_cmtig")]
+position = Vector2(600, 392)
+
+[node name="Environment Text" type="Node" parent="Environment"]
+
+[node name="FallingText" type="Label" parent="Environment/Environment Text"]
+offset_left = 1000.0
+offset_top = -384.0
+offset_right = 1351.0
+offset_bottom = -337.0
+theme_override_fonts/font = ExtResource("16_4v128")
+theme_override_font_sizes/font_size = 16
+text = "Dont stand on the clouds for too long"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Hazards" type="Node" parent="Environment"]
+
+[node name="Rock_1" parent="Environment/Hazards" instance=ExtResource("17_3xeso")]
+position = Vector2(840, 344)
+
+[node name="Rock_2" parent="Environment/Hazards" instance=ExtResource("18_dx5cj")]
+position = Vector2(1784, 80)
+
+[node name="Rock_3" parent="Environment/Hazards" instance=ExtResource("19_jex3f")]
+position = Vector2(149, -32)
+
+[node name="Rock_4" parent="Environment/Hazards" instance=ExtResource("17_3xeso")]
+position = Vector2(360, -120)
+
+[node name="Rock_5" parent="Environment/Hazards" instance=ExtResource("19_jex3f")]
+position = Vector2(376, -360)
+
+[node name="Rock_6" parent="Environment/Hazards" instance=ExtResource("17_3xeso")]
+position = Vector2(1008, -536)
+
+[node name="Rock_7" parent="Environment/Hazards" instance=ExtResource("17_3xeso")]
+position = Vector2(1376, -504)
+
+[node name="Rock_8" parent="Environment/Hazards" instance=ExtResource("17_3xeso")]
+position = Vector2(1720, -312)
+
+[node name="Rock_9" parent="Environment/Hazards" instance=ExtResource("17_3xeso")]
+position = Vector2(1656, -720)
+
+[node name="Player" parent="." instance=ExtResource("3_abwj2")]
+position = Vector2(120, 296)
+
+[node name="LevelTimer" type="CanvasLayer" parent="."]
+script = ExtResource("11_ha76n")
+
+[node name="LevelTimer" type="Timer" parent="LevelTimer"]
+wait_time = 60.0
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="LevelTimer"]
+position = Vector2(174, 672.4)
+scale = Vector2(0.253125, 0.112222)
+texture = ExtResource("5_e8u2d")
+
+[node name="TimerText" type="Label" parent="LevelTimer"]
+offset_left = 30.0
+offset_top = 640.0
+offset_right = 419.0
+offset_bottom = 715.0
+theme_override_fonts/font = ExtResource("6_erlk6")
+theme_override_font_sizes/font_size = 50
+text = "Time Left: 00.0"
+
+[node name="Lose_SFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("22_8ug5g")
+
+[node name="Win_SFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("23_kh7ey")
+volume_db = 4.878

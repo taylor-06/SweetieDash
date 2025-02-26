@@ -1,0 +1,88 @@
+[gd_scene load_steps=10 format=3 uid="uid://dmesleyedcn1"]
+
+[ext_resource type="Script" path="res://Scripts/death_menu_script.gd" id="1_ccioe"]
+[ext_resource type="Texture2D" uid="uid://bmwe1jx76jyyk" path="res://Assets/Menu Items/ESC_Menu_Background.png" id="2_8nuxp"]
+[ext_resource type="PackedScene" uid="uid://duu7h4qycrvdw" path="res://Scenes/back_button.tscn" id="3_te3yy"]
+[ext_resource type="PackedScene" uid="uid://b6ava5dcnfmnf" path="res://Scenes/level_select_button.tscn" id="4_6voyc"]
+[ext_resource type="Texture2D" uid="uid://d4f0de7q4qvws" path="res://Assets/Menu Items/Buttons/Retry_Button_Normal.png" id="4_8dvdr"]
+[ext_resource type="Texture2D" uid="uid://vkxgf3m5f6ci" path="res://Assets/Menu Items/Buttons/Retry_Button_Pressed.png" id="5_byrgd"]
+[ext_resource type="AudioStream" uid="uid://bvmsi1qrqqfgh" path="res://Assets/SFX/button_sfx.wav" id="6_3nrqq"]
+[ext_resource type="FontFile" uid="uid://dw2w6etcippc1" path="res://Assets/Fonts/TropiLand-L3MPg.ttf" id="6_ii57i"]
+
+[sub_resource type="GDScript" id="GDScript_3uagh"]
+script/source = "extends TextureButton
+
+@onready var buttonSFX = $ButtonSFX
+
+func _on_pressed():
+	buttonSFX.play()
+	print(\"button sfx played\")
+"
+
+[node name="Death_Menu" type="CanvasLayer"]
+visible = false
+script = ExtResource("1_ccioe")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8nuxp")
+
+[node name="Retry_Button" parent="TextureRect" instance=ExtResource("3_te3yy")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -20.0
+offset_right = 364.0
+offset_bottom = 206.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("4_8dvdr")
+texture_pressed = ExtResource("5_byrgd")
+
+[node name="Retry_Button_SFX" type="AudioStreamPlayer2D" parent="TextureRect/Retry_Button"]
+stream = ExtResource("6_3nrqq")
+
+[node name="RichTextLabel" type="Label" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -152.0
+offset_bottom = -152.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_ii57i")
+theme_override_font_sizes/font_size = 150
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Level_Select_Button" parent="TextureRect" instance=ExtResource("4_6voyc")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = 88.0
+offset_right = 364.0
+offset_bottom = 314.0
+script = SubResource("GDScript_3uagh")
+
+[connection signal="pressed" from="TextureRect/Retry_Button" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="TextureRect/Level_Select_Button" to="." method="_on_level_select_button_pressed"]

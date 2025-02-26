@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://crrxwbeex8tc1"]
+
+[ext_resource type="Texture2D" uid="uid://djdgp5ajprfda" path="res://Assets/Menu Items/Buttons/Reset_Score_Button_Normal.png" id="1_duu18"]
+[ext_resource type="Texture2D" uid="uid://m1fn12jstxon" path="res://Assets/Menu Items/Buttons/Reset_Score_Button_Pressed.png" id="2_bsdho"]
+[ext_resource type="AudioStream" uid="uid://bvmsi1qrqqfgh" path="res://Assets/SFX/button_sfx.wav" id="3_t38ys"]
+
+[node name="Reset_Score_Button" type="TextureButton"]
+offset_right = 460.0
+offset_bottom = 226.0
+scale = Vector2(0.4, 0.4)
+size_flags_horizontal = 0
+texture_normal = ExtResource("1_duu18")
+texture_pressed = ExtResource("2_bsdho")
+
+[node name="ButtonSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_t38ys")
